@@ -6,6 +6,24 @@ Boston City Data - Start of our Data Science journey
 In your code do not use any "for loops" - use Array Callback style
 
 */
+// note: in exercise.data, the data positions are stated as "1", "2", etc., but when working
+// in js they are all +6. So position "12" is accessed via [18].
+/*
+06: id
+07: position
+08: NAME
+09: TITLE
+10: DEPARTMENT NAME
+11: REGULAR ($$) 
+12: RETRO ($$)
+13: OTHER ($$)
+14: OVERTIME ($$)
+15: INJURED ($$)
+16: DETAIL ($$)
+17: QUINN ($$)
+18: TOTAL EARNINGS ($$)
+19: ZIP
+*/
 
 exercise.maxEarnings = function() {
 

@@ -34,6 +34,9 @@ exercise.maxEarnings = function() {
 
     */
 
+    //var totalEarningsWithOvertimeArray = [];
+
+    /* JM: commented out example for loop we were told to replace.
     var currentMax = 0.0;
     var people = exercise.data.data;
     var dataLength = people.length;
@@ -46,6 +49,15 @@ exercise.maxEarnings = function() {
         }
     }
 
+    return currentMax;
+    */
+
+    // JM - I added it
+    var people = exercise.data.data;
+    var earnings = people.map(getEarnings);
+    //var currentMax = findMax(earnings);
+    var currentMax = earnings.reduce(findMax, 0);
+    //var currentMax = earnings.reduce(findMax(earnings), 0);
     return currentMax;
 };
 
@@ -63,6 +75,33 @@ exercise.maxEarnings = function() {
 
 */
 
+var getEarnings = function(person) {
+    return Number(person[18]);
+};
+
+var findMax = function (previous, current){
+    if (current > previous) previous = current;
+    return previous;
+}
+//JM: for posterity:
+// var findMax = function(earningArray) {
+//     return Math.max.apply(Math, earningArray); //alt: Math.max(...earningArray);
+
+//     // var currentMax = 0.0;
+//     // //var people = exercise.data.data;
+//     // var dataLength = earningArray.length;
+//     // var currentSal;
+
+//     // for (var i = 0; i < dataLength; i++) {
+//     //     currentSal = Number(earningArray[i]);
+//     //     if (currentMax < currentSal) {
+//     //         currentMax = currentSal;
+//     //     };
+//     // };
+//     //return currentMax;
+// };
+
+
 exercise.earningsAbove = function(target) {
 
     /* EX 2
@@ -73,10 +112,21 @@ exercise.earningsAbove = function(target) {
 
     */
 
-    var num_salaraies = 0;
+
     var people = exercise.data.data; // get handle on data
 
-    return num_salaraies;
+    //JM: I added below
+    var earnings = people.map(getEarnings);
+
+    var isAboveTarget = function (test) {
+        return (test > target);
+    };
+
+
+    //var salariesAboveTarget = earnings.filter(isAboveTarget());
+    var salariesAboveTarget = earnings.filter(isAboveTarget);
+
+    return salariesAboveTarget.length;
 };
 
 exercise.totalBasePayroll = function() {
@@ -87,9 +137,21 @@ exercise.totalBasePayroll = function() {
     use Map and Reduce to do this
 
     */
-
+    // JM added:
+    var people = exercise.data.data;
+    var earnings = people.map(getBaseEarnings);
+    var earningsTotal = earnings.reduce(function(total, num){
+        return total + num
+    });
+    return Math.floor(earningsTotal);
 };
 
+var getBaseEarnings = function(person) {
+    return Number(person[19]);
+}
+
+var getZips = function(person) {
+    return Number(person[11]);
 exercise.totalEarningsWithOvertime = function() {
 
     /* EX 4
@@ -97,7 +159,13 @@ exercise.totalEarningsWithOvertime = function() {
     return the total Earnings with Overtime as an integer
 
     */
-
+    // JM added:
+    var people = exercise.data.data;
+    var earnings = people.map(getEarnings);
+    var earningsTotal = earnings.reduce(function(total, num){
+        return total + num
+    });
+    return Math.floor(earningsTotal);
 };
 
 exercise.numberUniqueZipCodes = function() {

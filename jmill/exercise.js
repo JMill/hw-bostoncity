@@ -147,11 +147,16 @@ exercise.totalBasePayroll = function() {
 };
 
 var getBaseEarnings = function(person) {
-    return Number(person[19]);
-}
-
-var getZips = function(person) {
     return Number(person[11]);
+};
+
+var getZips5digit = function(person) {
+    if (person[19]){
+        return person[19].slice(0,6);    
+    } else {return false};
+    
+};
+
 exercise.totalEarningsWithOvertime = function() {
 
     /* EX 4
@@ -168,15 +173,28 @@ exercise.totalEarningsWithOvertime = function() {
     return Math.floor(earningsTotal);
 };
 
+
 exercise.numberUniqueZipCodes = function() {
 
     /* EX 5
 
-    return the unique number zipcodes as an integer
+    return the unique number of zipcodes as an integer
 
     */
 
-    var zipCodes = [];
+    var uniqueZips = [];
+    var people = exercise.data.data;
+    var zipListWithDups = people.map(getZips5digit);
 
-    return zipCodes.length;
+    var isUnique = function (element){
+        if (!(element == "UNKNO" || element == "NSBIS")){
+            if (!( uniqueZips.includes(element))) {
+                uniqueZips.push(element);
+            };
+        };
+       return !(uniqueZips.includes(element));
+    };
+
+    zipListWithDups.forEach(isUnique);
+    return uniqueZips.length;
 };
